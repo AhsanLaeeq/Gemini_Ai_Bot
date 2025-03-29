@@ -5,13 +5,13 @@
   "type": "module",
   "repository": {
     "type": "git",
-     "url": "https://github.com/AhsanLaeeq/Gemini_Ai_Bot.git"
+    "url": "https://github.com/AhsanLaeeq/Gemini_Ai_Bot.git"
   },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-     "predeploy": "npm run build",
-     "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint .",
     "preview": "vite preview"
   },
