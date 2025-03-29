@@ -1,0 +1,203 @@
+/* Sidebar Container */
+.sidebar {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #f0f4f9;
+    padding: 5vh 2vw;
+    width: 15vw;
+    transition: width 0.3s ease-in-out, padding 0.3s ease-in-out;
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+}
+
+/* Collapsed Sidebar */
+.sidebar.collapsed {
+    width: 5vw;
+    padding: 2vh 1vw;
+    align-items: center;
+}
+
+/* Sidebar Images */
+.sidebar img {
+    width: 1.5vw;
+    transition: width 0.3s ease-in-out;
+}
+
+/* Menu Icon */
+.sidebar .menu {
+    display: block;
+    cursor: pointer;
+    align-self: center;
+    margin-left: 2vw;
+    margin-top: 1vh;
+    transition: margin 0.3s ease-in-out;
+}
+
+/* New Chat Button */
+.sidebar .new-chat {
+    margin-top: 5vh;
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    padding: 2vh 2vw;
+    background-color: #e6eaf1;
+    border-radius: 50px;
+    font-size: clamp(0.6rem, 1vw, 0.8rem);
+    color: grey;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hide Text When Collapsed */
+.sidebar.collapsed .new-chat p,
+.sidebar.collapsed .recent-title,
+.sidebar.collapsed .recent-entry p,
+.sidebar.collapsed .bottom-item p {
+    display: none;
+}
+
+/* Recent Titles with Fade-in Effect */
+.sidebar .recent-title {
+    margin-top: 3vh;
+    margin-bottom: 2vh;
+    font-size: clamp(0.6rem, 1vw, 0.8rem);
+    opacity: 0;
+    transform: translateY(-1vh);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.sidebar:not(.collapsed) .recent-title {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Recent Entries with Fade-in Effect */
+.sidebar .recent-entry {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    padding: 0.3vh 0.5vw;
+    border-radius: 50px;
+    color: #282828;
+    cursor: pointer;
+    font-size: clamp(0.6rem, 1vw, 0.8rem);
+    opacity: 0;
+    transform: translateY(-1vh);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.sidebar .recent-entry p {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sidebar .recent-entry:hover {
+    background-color: #e2e6eb;
+}
+
+.sidebar:not(.collapsed) .recent-entry {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Bottom Items */
+.sidebar .bottom {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .bottom-item {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    padding: 1vh 1.5vw;
+    font-size: clamp(0.6rem, 1vw, 0.8rem);
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.sidebar .bottom-item p {
+    font-weight: normal;
+    color: #282828;
+    transition: color 0.3s ease-in-out;
+}
+
+.sidebar .bottom-item:hover p {
+    color: #007bff;
+}
+
+.sidebar .bottom-item img {
+    width: 1.8vw;
+    transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.sidebar.collapsed .bottom-item p {
+    display: none;
+}
+
+.sidebar.collapsed .bottom-item {
+    justify-content: center;
+}
+
+/* Sidebar Slide Animation */
+@keyframes sidebarSlide {
+    0% {
+        width: 5vw;
+        opacity: 0;
+    }
+    100% {
+        width: 15vw;
+        opacity: 1;
+    }
+}
+
+/* Responsive Fix for Smaller Screens */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 20vw;
+    }
+    .sidebar.collapsed {
+        width: 7vw;
+    }
+    .sidebar .recent-entry {
+        flex-wrap: wrap;
+    }
+    .sidebar .recent-entry p {
+        white-space: normal;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 25vw;
+    }
+    .sidebar.collapsed {
+        width: 8vw;
+    }
+}
+
+@media (max-width: 320px) {
+    .sidebar {
+        width: 30vw;
+    }
+    .sidebar.collapsed {
+        width: 9vw;
+    }
+}
+.sidebar {
+    height: 100vh;
+    overflow-y: auto;
+}
