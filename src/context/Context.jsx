@@ -10,6 +10,7 @@ const ContextProvider = (props) => {
     const [showResult, setShowResult] = useState(false); // Boolean to toggle result visibility.
     const [loading, setLoading] = useState(false); // Boolean to track loading state.
     const [resultData, setResultData] = useState(""); // Stores the result data.
+    const [totalResultDataCount, setTotalResultDataCount] = useState(0);
 
     const delayPara = (index, nextWord) => {
         setTimeout(() => {
@@ -26,21 +27,20 @@ const ContextProvider = (props) => {
         setResultData("");
         setLoading(true);
         setShowResult(true);
-    
+
         let inputToProcess = userInput && userInput.trim() !== "" ? userInput : input;
-    
-        // 🔹 Only store input if it's NOT already in prevInputs
+
         setPrevInputs(prev => {
             if (!prev.includes(inputToProcess)) {
                 return [...prev, inputToProcess];
             }
             return prev;
         });
-    
+
         setRecentInput(inputToProcess);
-    
+
         const response = await run(inputToProcess);
-    
+
         let responseArray = response.split("**");
         let newResponse = "";
         for (let i = 0; i < responseArray.length; i++) {
@@ -50,20 +50,19 @@ const ContextProvider = (props) => {
                 newResponse += "<b>" + responseArray[i] + "</b>";
             }
         }
-    
+
         let response2 = newResponse.split("*").join("</br>");
         let newArrayres = response2.split(" ");
         for (let i = 0; i < newArrayres.length; i++) {
             const nextWord = newArrayres[i];
             delayPara(i, nextWord + " ");
         }
-    
+        setTotalResultDataCount(response2.length + 1); // ✅ Correct way to update state
+        console.log(response2.length); // ✅ Logs the correct length
+
         setLoading(false);
         setInput(""); 
     };
-    
-    
-    
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter" && input.trim() !== "") {
@@ -84,6 +83,8 @@ const ContextProvider = (props) => {
         setInput,
         newChat,
         handleKeyDown,
+        totalResultDataCount,
+        setShowResult,
     };
 
     return (

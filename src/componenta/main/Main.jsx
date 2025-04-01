@@ -4,7 +4,18 @@ import { assets } from "../../assets/assets";
 import { Context } from "../../context/Context";
 
 const Main = () => {
-  const { onSent, recentInput, showResult, loading, resultData, setInput, input, handleKeyDown } = useContext(Context);
+  const {
+    onSent,
+    recentInput,
+    showResult,
+    loading,
+    resultData,
+    setInput,
+    input,
+    handleKeyDown,
+    totalResultDataCount,
+    newChat,
+  } = useContext(Context);
 
   return (
     <div className="main">
@@ -23,11 +34,11 @@ const Main = () => {
               <p>How can I help you today?</p>
             </div>
             <div className="cards">
-              <div className="card">
-                <p>Suggest beautiful places to see on an upcoming road trip</p>
+              <div className="card" onClick={() => onSent("Suggest beautiful places to see on an upcoming road trip in Saudia Arabia")}>
+                <p>Suggest beautiful places to see on an upcoming road trip in Saudia Arabia</p>
                 <img src={assets.compass_icon} alt="Compass Icon" />
               </div>
-              <div className="card">
+              <div className="card" onClick={() => onSent("Briefly summarize this concept: urban planning")}>
                 <p>Briefly summarize this concept: urban planning</p>
                 <img src={assets.bulb_icon} alt="Bulb Icon" />
               </div>
@@ -63,10 +74,22 @@ const Main = () => {
               placeholder="Enter a prompt here"
               onKeyDown={handleKeyDown}
             />
+
             <div>
               <img src={assets.gallery_icon} alt="Gallery Icon" />
               <img src={assets.mic_icon} alt="Mic Icon" />
-              <img onClick={() => onSent(input)} src={assets.send_icon} alt="Send Icon" />
+
+              <img
+                onClick={() => {
+                  if (resultData.length < totalResultDataCount) {
+                    newChat(); // Call newChat if the resultData length is less than totalResultDataCount
+                  } else {
+                    onSent(input); // Otherwise, send the current input to onSent
+                  }
+                }}
+                src={loading || input === "" ? assets.stop_icon : assets.send_icon}
+                alt={loading || input === "" ? "Stop icon" : "Send icon"}
+              />
             </div>
           </div>
           <p className="bottom-info">

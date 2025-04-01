@@ -219,7 +219,7 @@
 
 /* Chat Results */
 .result {
-    padding: 0 5vw;
+    padding: 0 0vw;
     max-height: 70vh;
     overflow-y: scroll;
 }
