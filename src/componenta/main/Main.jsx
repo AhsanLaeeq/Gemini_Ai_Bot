@@ -35,7 +35,7 @@ const Main = () => {
             </div>
             <div className="cards">
               <div className="card" onClick={() => onSent("Suggest beautiful places to see on an upcoming road trip in Saudia Arabia")}>
-                <p>Suggest beautiful places to see on an upcoming road trip in Saudia Arabia</p>
+                <p>Suggest beautiful places to see on an upcoming trip in Saudia Arabia</p>
                 <img src={assets.compass_icon} alt="Compass Icon" />
               </div>
               <div className="card" onClick={() => onSent("Briefly summarize this concept: urban planning")}>
